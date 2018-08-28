@@ -30,7 +30,7 @@ import java.io.InputStream;
  *
  * @author <a href="http://www.martiansoftware.com/contact.html">Marty Lamb</a>
  */
-class ThreadLocalInputStream extends InputStream {
+public class ThreadLocalInputStream extends InputStream {
 
   /** The InputStreams for the various threads */
   private InheritableThreadLocal streams = null;
@@ -53,8 +53,16 @@ class ThreadLocalInputStream extends InputStream {
    *
    * @param streamForCurrentThread the InputStream for the current thread
    */
-  void init(InputStream streamForCurrentThread) {
+  public void init(InputStream streamForCurrentThread) {
     streams.set(streamForCurrentThread);
+  }
+
+  public void setDefaultStream(InputStream defaultInputStream) {
+    this.defaultInputStream = defaultInputStream;
+  }
+
+  public InputStream getDefaultInputStream() {
+    return defaultInputStream;
   }
 
   /**
