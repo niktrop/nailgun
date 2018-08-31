@@ -8,9 +8,9 @@
 		<version>7</version>
 	</parent>
 	
-    <groupId>com.martiansoftware</groupId>
+    <groupId>org.jetbrains</groupId>
     <artifactId>nailgun-all</artifactId>
-    <version>0.9.3-SNAPSHOT</version>
+    <version>0.9.3</version>
     <packaging>pom</packaging>
    
     <properties>
@@ -27,6 +27,9 @@
         handles all I/O.
     
         This project contains the server and examples.
+
+        This is a fork of nailgun with patches from JetBrains and Lightbend.
+        Used inside IntelliJ IDEA as Scala compile server.
     </description>
     <url>http://github.com/facebook/nailgun</url>
 
@@ -39,16 +42,16 @@
     </licenses>    
 
     <scm>
-        <url>scm:git:git@github.com:facebook/nailgun.git</url>
-        <connection>scm:git:git@github.com:facebook/nailgun.git</connection>
-        <developerConnection>scm:git:git@github.com:facebook/nailgun.git</developerConnection>
+        <url>scm:git:git@github.com:niktrop/nailgun.git</url>
+        <connection>scm:git:git@github.com:niktrop/nailgun.git</connection>
+        <developerConnection>scm:git:git@github.com:niktrop/nailgun.git</developerConnection>
       <tag>nailgun-all-0.9.3</tag>
   </scm>
 
     <developers>
         <developer>
-            <name>Facebook</name>
-            <url>http://github.com/facebook/nailgun</url>
+            <name>JetBrains</name>
+            <url>https://github.com/niktrop/nailgun</url>
         </developer>
     </developers>
 	
@@ -94,27 +97,13 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
     
     <distributionManagement>
-        <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus snapshot repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Sonatype Nexus release repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>bintray-repo</id>
+            <url>https://api.bintray.com/maven/jetbrains/scala-plugin-deps/nailgun-server/;publish=1</url>
         </repository>
     </distributionManagement>
 
@@ -128,25 +117,6 @@
 				</property>
 			</activation>
 			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.4</version>
-						<configuration>
-							<passphrase>${gpg.passphrase}</passphrase>
-						</configuration>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
 			</build>
 		</profile>
 	</profiles>
